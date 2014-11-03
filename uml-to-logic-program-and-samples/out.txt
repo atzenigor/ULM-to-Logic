@@ -1,0 +1,99 @@
+ATTRIBUTE FOL
+∀ x,y.attributeLabel(x,y) ⊃ UMLClassNode(x) ∧ String(y)
+
+
+ATTRIBUTE FOL
+∀ x,y.operationLabel(x,y) ⊃ UMLClassNode(x) ∧ String(y)
+
+
+ATTRIBUTE DL
+∃attributeLabel ⊑ UMLClassNode
+∃attributeLabelˉ ⊑ String
+
+
+ATTRIBUTE DL
+∃operationLabel ⊑ UMLClassNode
+∃operationLabelˉ ⊑ String
+
+
+ATTRIBUTE FOL
+∀ x,y.name(x,y) ⊃ Node(x) ∧ String(y)
+
+
+ATTRIBUTE DL
+∃name ⊑ Node
+∃nameˉ ⊑ String
+
+
+ATTRIBUTE FOL
+∀ x,y.labels(x,y) ⊃ NormalEdge(x) ∧ String(y)
+
+
+ATTRIBUTE DL
+∃labels ⊑ NormalEdge
+∃labelsˉ ⊑ String
+
+
+ASSOCIATION FOL
+∀ x,y.Connected(x,y) ⊃ Edge(x) ∧ Node(y)
+∀ x.Edge(x) ⊃ (2 ≤ #{y | Connected(x,y)} ≤ 2)
+
+
+ASSOCIATION DL
+∃Connected ⊑ Edge
+∃Connectedˉ ⊑ Node
+Edge ⊑ (≥2Connected) ⊓ (≤2Connected)
+
+
+GENERALIZATION FOL
+∀ x.EllipseNode(x) ⊃ Node(x)
+∀ x.UMLClassNode(x) ⊃ Node(x)
+∀ x.RectangleNode(x) ⊃ Node(x)
+∀ x.DiamondNode(x) ⊃ Node(x)
+
+∀ x.EllipseNode(x) ⊃ ¬UMLClassNode(x)
+∀ x.EllipseNode(x) ⊃ ¬RectangleNode(x)
+∀ x.EllipseNode(x) ⊃ ¬DiamondNode(x)
+∀ x.UMLClassNode(x) ⊃ ¬RectangleNode(x)
+∀ x.UMLClassNode(x) ⊃ ¬DiamondNode(x)
+∀ x.RectangleNode(x) ⊃ ¬DiamondNode(x)
+
+∀ x.Node(x) ⊃ (EllipseNode(x) ∨ UMLClassNode(x) ∨ RectangleNode(x) ∨ DiamondNode(x))
+
+
+GENERALIZATION DL
+EllipseNode ⊑ Node
+UMLClassNode ⊑ Node
+RectangleNode ⊑ Node
+DiamondNode ⊑ Node
+
+EllipseNode ⊑ ¬UMLClassNode
+EllipseNode ⊑ ¬RectangleNode
+EllipseNode ⊑ ¬DiamondNode
+UMLClassNode ⊑ ¬RectangleNode
+UMLClassNode ⊑ ¬DiamondNode
+RectangleNode ⊑ ¬DiamondNode
+
+Node ⊑ EllipseNode ⊔ UMLClassNode ⊔ RectangleNode ⊔ DiamondNode
+GENERALIZATION FOL
+∀ x.ArchEdge(x) ⊃ Edge(x)
+∀ x.NormalEdge(x) ⊃ Edge(x)
+∀ x.ArrowEdge(x) ⊃ Edge(x)
+
+∀ x.ArchEdge(x) ⊃ ¬NormalEdge(x)
+∀ x.ArchEdge(x) ⊃ ¬ArrowEdge(x)
+∀ x.NormalEdge(x) ⊃ ¬ArrowEdge(x)
+
+∀ x.Edge(x) ⊃ (ArchEdge(x) ∨ NormalEdge(x) ∨ ArrowEdge(x))
+
+
+GENERALIZATION DL
+ArchEdge ⊑ Edge
+NormalEdge ⊑ Edge
+ArrowEdge ⊑ Edge
+
+ArchEdge ⊑ ¬NormalEdge
+ArchEdge ⊑ ¬ArrowEdge
+NormalEdge ⊑ ¬ArrowEdge
+
+Edge ⊑ ArchEdge ⊔ NormalEdge ⊔ ArrowEdge
